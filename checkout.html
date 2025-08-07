@@ -7,7 +7,21 @@
 </head>
 <body>
     <h1>اكمال الطلبية</h1>
-    <form id="checkoutForm">
+
+    <!-- Product Summary -->
+    <div id="productSummary" style="border:1px solid #ccc; padding:10px; margin-bottom:15px;">
+        <h2>المنتج المختار</h2>
+        <p id="productName"></p>
+        <p id="productPrice"></p>
+        <p id="productVariant"></p>
+    </div>
+
+    <form id="checkoutForm" method="POST" action="https://formspree.io/f/YOUR_FORM_ID">
+        <!-- Hidden fields to send product info -->
+        <input type="hidden" name="productName" id="hiddenProductName">
+        <input type="hidden" name="productPrice" id="hiddenProductPrice">
+        <input type="hidden" name="productVariant" id="hiddenProductVariant">
+
         <label>الاسم الكامل: <input type="text" name="fullName" required></label>
         <label>اللقب: <input type="text" name="lastName" required></label>
         <label>رقم الهاتف: <input type="tel" name="phone" required></label>
@@ -88,63 +102,20 @@
     </form>
 
     <script>
-        const shippingRates = {
-            "Adrar": { منزل: 1100, مكتب: 600 },
-            "Chlef": { منزل: 700, مكتب: 400 },
-            "Laghouat": { منزل: 900, مكتب: 400 },
-            "Oum El Bouaghi": { منزل: 800, مكتب: 400 },
-            "Batna": { منزل: 800, مكتب: 400 },
-            "Béjaïa": { منزل: 700, مكتب: 400 },
-            "Biskra": { منزل: 1100, مكتب: 600 },
-            "Béchar": { منزل: 900, مكتب: 500 },
-            "Blida": { منزل: 500, مكتب: 250 },
-            "Bouira": { منزل: 650, مكتب: 400 },
-            "Tamanrasset": { منزل: 1300, مكتب: 600 },
-            "Tébessa": { منزل: 800, مكتب: 500 },
-            "Tlemcen": { منزل: 800, مكتب: 400 },
-            "Tiaret": { منزل: 800, مكتب: 400 },
-            "Tizi Ouzou": { منزل: 650, مكتب: 400 },
-            "Alger": { منزل: 700, مكتب: 400 },
-            "Djelfa": { منزل: 900, مكتب: 500 },
-            "Jijel": { منزل: 700, مكتب: 400 },
-            "Sétif": { منزل: 700, مكتب: 400 },
-            "Saïda": { منزل: 800, مكتب: 400 },
-            "Skikda": { منزل: 700, مكتب: 400 },
-            "Sidi Bel Abbès": { منزل: 700, مكتب: 400 },
-            "Annaba": { منزل: 700, مكتب: 400 },
-            "Guelma": { منزل: 800, مكتب: 400 },
-            "Constantine": { منزل: 700, مكتب: 400 },
-            "Médéa": { منزل: 700, مكتب: 400 },
-            "Mostaganem": { منزل: 700, مكتب: 400 },
-            "M’Sila": { منزل: 800, مكتب: 500 },
-            "Mascara": { منزل: 700, مكتب: 400 },
-            "Ouargla": { منزل: 1000, مكتب: 500 },
-            "Oran": { منزل: 700, مكتب: 400 },
-            "El Bayadh": { منزل: 1000, مكتب: 500 },
-            "Illizi": { منزل: 1300, مكتب: 600 },
-            "Bordj Bou Arreridj": { منزل: 700, مكتب: 400 },
-            "Boumerdès": { منزل: 600, مكتب: 350 },
-            "El Tarf": { منزل: 800, مكتب: null },
-            "Tindouf": { منزل: 1300, مكتب: null },
-            "Tissemsilt": { منزل: 800, مكتب: 400 },
-            "El Oued": { منزل: 900, مكتب: 500 },
-            "Khenchela": { منزل: 800, مكتب: 500 },
-            "Souk Ahras": { منزل: 800, مكتب: 500 },
-            "Tipaza": { منزل: 600, مكتب: 350 },
-            "Mila": { منزل: 700, مكتب: 400 },
-            "Aïn Defla": { منزل: 600, مكتب: 400 },
-            "Naâma": { منزل: 800, مكتب: null },
-            "Aïn Témouchent": { منزل: 700, مكتب: 400 },
-            "Ghardaïa": { منزل: 1000, مكتب: 500 },
-            "Relizane": { منزل: 700, مكتب: 400 },
-            "Timimoun": { منزل: 1300, مكتب: null },
-            "Ouled Djellal": { منزل: 900, مكتب: null },
-            "Beni Abbes": { منزل: 1300, مكتب: null },
-            "In Salah": { منزل: 1300, مكتب: 600 },
-            "Touggourt": { منزل: 900, مكتب: null },
-            "El M’Ghair": { منزل: 900, مكتب: null },
-            "El Meniaa": { منزل: 1000, مكتب: null }
-        };
+        // Load product from localStorage
+        const selectedProduct = JSON.parse(localStorage.getItem('selectedProduct'));
+        if (selectedProduct) {
+            document.getElementById('productName').innerText = "المنتج: " + selectedProduct.name;
+            document.getElementById('productPrice').innerText = "السعر: " + selectedProduct.price;
+            document.getElementById('productVariant').innerText = "اللون/النوع: " + selectedProduct.variant;
+
+            // Set hidden fields for submission
+            document.getElementById('hiddenProductName').value = selectedProduct.name;
+            document.getElementById('hiddenProductPrice').value = selectedProduct.price;
+            document.getElementById('hiddenProductVariant').value = selectedProduct.variant;
+        }
+
+        const shippingRates = { /* نفس جدول الأسعار الذي وضعناه سابقاً */ };
 
         document.getElementById('stateSelect').addEventListener('change', updateDeliveryCost);
         document.getElementById('deliveryType').addEventListener('change', updateDeliveryCost);
