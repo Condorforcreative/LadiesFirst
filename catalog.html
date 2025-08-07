@@ -6,20 +6,28 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <header class="site container"></header>
+
+<main class="container section">
+  <div class="catalog-header">
     <h1>المنتجات</h1>
     <div class="filters">
-        <select id="filterCategory">
-            <option value="">كل التصنيفات</option>
-            <option value="حقائب">حقائب</option>
-            <option value="محافظ">محافظ</option>
-        </select>
-        <select id="filterColor">
-            <option value="">كل الألوان</option>
-            <option value="أسود">أسود</option>
-            <option value="بني">بني</option>
-        </select>
+      <select id="filterCategory" class="select">
+        <option value="">كل التصنيفات</option>
+        <option value="حقائب">حقائب</option>
+      </select>
+      <select id="filterColor" class="select">
+        <option value="">كل الألوان/الأنواع</option>
+        <option value="أسود">أسود</option>
+        <option value="أخضر">أخضر</option>
+        <option value="بني">بني</option>
+        <option value="افتراضي">افتراضي</option>
+      </select>
     </div>
-    <div id="productList" class="product-grid"></div>
-    <script src="js/main.js"></script>
+  </div>
+
+  <div id="productList" class="product-grid"></div>
+</main>
+<script src="js/main.js"></script>
 </body>
 </html>
