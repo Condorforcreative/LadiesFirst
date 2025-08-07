@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>اكمال الطلبية</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h1>اكمال الطلبية</h1>
+    <form id="checkoutForm">
+        <label>الاسم الكامل: <input type="text" name="fullName" required></label>
+        <label>اللقب: <input type="text" name="lastName" required></label>
+        <label>رقم الهاتف: <input type="tel" name="phone" required></label>
+        <label>الولاية:
+            <select name="state" id="stateSelect" required>
+                <option value="الجزائر">الجزائر</option>
+                <option value="وهران">وهران</option>
+                <option value="قسنطينة">قسنطينة</option>
+            </select>
+        </label>
+        <label>المدينة: <input type="text" name="city" required></label>
+        <label>الشارع: <input type="text" name="street" required></label>
+        <label>نوع التوصيل:
+            <select name="deliveryType" id="deliveryType" required>
+                <option value="المنزل">المنزل</option>
+                <option value="مكتب">مكتب</option>
+            </select>
+        </label>
+        <p id="deliveryCost">تكلفة التوصيل: 0 دج</p>
+        <button type="submit">تأكيد الطلب</button>
+    </form>
+    <script>
+        document.getElementById('stateSelect').addEventListener('change', updateDeliveryCost);
+        document.getElementById('deliveryType').addEventListener('change', updateDeliveryCost);
+
+        function updateDeliveryCost() {
+            const state = document.getElementById('stateSelect').value;
+            const delivery = document.getElementById('deliveryType').value;
+            let cost = 0;
+            if (state === "الجزائر") cost = 400;
+            if (state === "وهران") cost = 500;
+            if (state === "قسنطينة") cost = 600;
+            document.getElementById('deliveryCost').innerText = "تكلفة التوصيل: " + cost + " دج";
+        }
+    </script>
+</body>
+</html>
