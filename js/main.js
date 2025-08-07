@@ -37,5 +37,30 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('filterCategory').addEventListener('change', renderProducts);
         document.getElementById('filterColor').addEventListener('change', renderProducts);
         renderProducts();
+const products = [
+    { 
+        id: 1, 
+        name: "صاك كروكو 3 قطع", 
+        category: "حقائب", 
+        price: "2300 دج", 
+        variants: ["افتراضي"], 
+        image: "assets/products/croco3set.png" 
+    },
+    { 
+        id: 2, 
+        name: "باك لي ساك قطعتين", 
+        category: "حقائب", 
+        price: "1700 دج", 
+        variants: ["أسود", "أخضر", "بني"], 
+        image: "assets/products/2piecespack.png" 
+    },
+    { 
+        id: 3, 
+        name: "بثلاث قطع GUESS باك لي ساك من علامة", 
+        category: "حقائب", 
+        price: "2900 دج", 
+        variants: ["افتراضي"], 
+        image: "assets/products/guess3set.png"  
     }
+
 });
