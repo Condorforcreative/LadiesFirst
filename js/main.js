@@ -1,7 +1,28 @@
 const products = [
-    { id: 1, name: "حقيبة يد فاخرة", category: "حقائب", color: "بني", price: "3000 دج", image: "assets/products/bag1.png" },
-    { id: 2, name: "محفظة جلد", category: "محافظ", color: "أسود", price: "1500 دج", image: "assets/products/wallet1.png" },
-    { id: 3, name: "حقيبة GUESS", category: "حقائب", color: "أسود", price: "4000 دج", image: "assets/products/bag2.png" }
+    { 
+        id: 1, 
+        name: "صاك كروكو 3 قطع", 
+        category: "حقائب", 
+        price: "2300 دج", 
+        variants: ["افتراضي"], 
+        image: "assets/products/croco3set.png" 
+    },
+    { 
+        id: 2, 
+        name: "باك لي ساك قطعتين", 
+        category: "حقائب", 
+        price: "1700 دج", 
+        variants: ["أسود", "أخضر", "بني"], 
+        image: "assets/products/2piecespack.png" 
+    },
+    { 
+        id: 3, 
+        name: "بثلاث قطع GUESS باك لي ساك من علامة", 
+        category: "حقائب", 
+        price: "2900 دج", 
+        variants: ["افتراضي"], 
+        image: "assets/products/guess3set.png" 
+    }
 ];
 
 function renderProducts() {
@@ -36,31 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('productList')) {
         document.getElementById('filterCategory').addEventListener('change', renderProducts);
         document.getElementById('filterColor').addEventListener('change', renderProducts);
-        renderProducts();
-const products = [
-    { 
-        id: 1, 
-        name: "صاك كروكو 3 قطع", 
-        category: "حقائب", 
-        price: "2300 دج", 
-        variants: ["افتراضي"], 
-        image: "assets/products/croco3set.png" 
-    },
-    { 
-        id: 2, 
-        name: "باك لي ساك قطعتين", 
-        category: "حقائب", 
-        price: "1700 دج", 
-        variants: ["أسود", "أخضر", "بني"], 
-        image: "assets/products/2piecespack.png" 
-    },
-    { 
-        id: 3, 
-        name: "بثلاث قطع GUESS باك لي ساك من علامة", 
-        category: "حقائب", 
-        price: "2900 دج", 
-        variants: ["افتراضي"], 
-        image: "assets/products/guess3set.png"  
+        renderProducts(); 
     }
 
 });
