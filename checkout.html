@@ -11,36 +11,108 @@
         <label>الاسم الكامل: <input type="text" name="fullName" required></label>
         <label>اللقب: <input type="text" name="lastName" required></label>
         <label>رقم الهاتف: <input type="tel" name="phone" required></label>
+        
         <label>الولاية:
             <select name="state" id="stateSelect" required>
-                <option value="الجزائر">الجزائر</option>
-                <option value="وهران">وهران</option>
-                <option value="قسنطينة">قسنطينة</option>
+                <option value="">اختر الولاية</option>
+                <option value="Alger">الجزائر</option>
+                <option value="Oran">وهران</option>
+                <option value="Constantine">قسنطينة</option>
+                <!-- أضف باقي الولايات هنا -->
             </select>
         </label>
+
         <label>المدينة: <input type="text" name="city" required></label>
         <label>الشارع: <input type="text" name="street" required></label>
+
         <label>نوع التوصيل:
             <select name="deliveryType" id="deliveryType" required>
                 <option value="المنزل">المنزل</option>
                 <option value="مكتب">مكتب</option>
             </select>
         </label>
+
         <p id="deliveryCost">تكلفة التوصيل: 0 دج</p>
         <button type="submit">تأكيد الطلب</button>
     </form>
+
     <script>
+        const shippingRates = {
+            "Adrar": { home: 1100, office: 600 },
+            "Chlef": { home: 700, office: 400 },
+            "Laghouat": { home: 900, office: 400 },
+            "Oum El Bouaghi": { home: 800, office: 400 },
+            "Batna": { home: 800, office: 400 },
+            "Béjaïa": { home: 700, office: 400 },
+            "Biskra": { home: 1100, office: 600 },
+            "Béchar": { home: 900, office: 500 },
+            "Blida": { home: 500, office: 250 },
+            "Bouira": { home: 650, office: 400 },
+            "Tamanrasset": { home: 1300, office: 600 },
+            "Tébessa": { home: 800, office: 500 },
+            "Tlemcen": { home: 800, office: 400 },
+            "Tiaret": { home: 800, office: 400 },
+            "Tizi Ouzou": { home: 650, office: 400 },
+            "Alger": { home: 700, office: 400 },
+            "Djelfa": { home: 900, office: 500 },
+            "Jijel": { home: 700, office: 400 },
+            "Sétif": { home: 700, office: 400 },
+            "Saïda": { home: 800, office: 400 },
+            "Skikda": { home: 700, office: 400 },
+            "Sidi Bel Abbès": { home: 700, office: 400 },
+            "Annaba": { home: 700, office: 400 },
+            "Guelma": { home: 800, office: 400 },
+            "Constantine": { home: 700, office: 400 },
+            "Médéa": { home: 700, office: 400 },
+            "Mostaganem": { home: 700, office: 400 },
+            "M’Sila": { home: 800, office: 500 },
+            "Mascara": { home: 700, office: 400 },
+            "Ouargla": { home: 1000, office: 500 },
+            "Oran": { home: 700, office: 400 },
+            "El Bayadh": { home: 1000, office: 500 },
+            "Illizi": { home: 1300, office: 600 },
+            "Bordj Bou Arreridj": { home: 700, office: 400 },
+            "Boumerdès": { home: 600, office: 350 },
+            "El Tarf": { home: 800, office: null },
+            "Tindouf": { home: 1300, office: null },
+            "Tissemsilt": { home: 800, office: 400 },
+            "El Oued": { home: 900, office: 500 },
+            "Khenchela": { home: 800, office: 500 },
+            "Souk Ahras": { home: 800, office: 500 },
+            "Tipaza": { home: 600, office: 350 },
+            "Mila": { home: 700, office: 400 },
+            "Aïn Defla": { home: 600, office: 400 },
+            "Naâma": { home: 800, office: null },
+            "Aïn Témouchent": { home: 700, office: 400 },
+            "Ghardaïa": { home: 1000, office: 500 },
+            "Relizane": { home: 700, office: 400 },
+            "Timimoun": { home: 1300, office: null },
+            "Ouled Djellal": { home: 900, office: null },
+            "Beni Abbes": { home: 1300, office: null },
+            "In Salah": { home: 1300, office: 600 },
+            "Touggourt": { home: 900, office: null },
+            "El M’Ghair": { home: 900, office: null },
+            "El Meniaa": { home: 1000, office: null }
+            // أكمل باقي الجدول هنا...
+        };
+
         document.getElementById('stateSelect').addEventListener('change', updateDeliveryCost);
         document.getElementById('deliveryType').addEventListener('change', updateDeliveryCost);
 
         function updateDeliveryCost() {
             const state = document.getElementById('stateSelect').value;
             const delivery = document.getElementById('deliveryType').value;
-            let cost = 0;
-            if (state === "الجزائر") cost = 400;
-            if (state === "وهران") cost = 500;
-            if (state === "قسنطينة") cost = 600;
-            document.getElementById('deliveryCost').innerText = "تكلفة التوصيل: " + cost + " دج";
+
+            if (shippingRates[state]) {
+                const cost = delivery === "المنزل" ? shippingRates[state].home : shippingRates[state].office;
+                if (cost !== null && cost !== undefined) {
+                    document.getElementById('deliveryCost').innerText = "تكلفة التوصيل: " + cost + " دج";
+                } else {
+                    document.getElementById('deliveryCost').innerText = "التوصيل غير متاح لهذا الخيار";
+                }
+            } else {
+                document.getElementById('deliveryCost').innerText = "اختر الولاية";
+            }
         }
     </script>
 </body>
