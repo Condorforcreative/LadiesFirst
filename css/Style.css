@@ -138,3 +138,8 @@ hr.sep{border:0; border-top:1px solid var(--border); margin:10px 0}
   color:#fff;
 }
 .brand{color:#fff}
+
+.nav{ z-index:10; }
+.hero::after{ z-index:0; }      /* (it’s already behind, but this is explicit) */
+.hero .overlay{ z-index:1; }     /* your text/button */
+
