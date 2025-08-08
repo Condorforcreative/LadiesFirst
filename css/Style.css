@@ -125,3 +125,8 @@ hr.sep{border:0; border-top:1px solid var(--border); margin:10px 0}
 /* helpers */
 .mt-1{margin-top:.5rem} .mt-2{margin-top:1rem}
 .center{text-align:center}
+
+/* point this to your real banner image */
+.hero.hero-bg{
+  background-image:url('assets/banner.png');
+}
