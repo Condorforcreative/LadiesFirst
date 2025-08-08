@@ -130,3 +130,11 @@ hr.sep{border:0; border-top:1px solid var(--border); margin:10px 0}
 .hero.hero-bg{
   background-image:url('assets/banner.png');
 }
+
+/* transparent header over hero */
+.nav{
+  position:absolute; inset-inline:0; top:10px;
+  width:min(1100px,92%); margin-inline:auto;
+  color:#fff;
+}
+.brand{color:#fff}
